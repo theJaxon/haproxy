@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: haproxy
+commonLabels:
+  app: haproxy
+commonAnnotations:
+  documentation: "https://www.haproxy.org/#docs"
+
+resources:
+- deployment.yaml
+- namespace.yaml
+- service.yaml
+
+configMapGenerator:
+- name: haproxy-conf
+  files:
+  - conf/haproxy.cfg

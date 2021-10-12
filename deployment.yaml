@@ -1,0 +1,23 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: haproxy
+spec:
+  template:
+    spec:
+      volumes:
+      - name: haproxy-conf 
+        configMap:
+          name: haproxy-conf
+
+      containers:
+      - image: haproxy:2.4.7
+        name: haproxy
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: haproxy-conf
+          mountPath: /usr/local/etc/haproxy
+
+
